@@ -1,3 +1,9 @@
+<%-- 
+    Document   : bienvenido
+    Created on : 15/11/2020, 02:07:19 PM
+    Author     : angel
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
@@ -11,27 +17,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Menu de Clientes - <%=usuario%></title>
+        <title>Menu principal - <%=usuario%></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="estilos/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <header>Menu de Clientes</header>
+        <header>Bienvenido a mi aplicacion web</header>
         <nav>
             <ul>
-                <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
-                <li><a href="control?tarea=agregarCliente">Agregar Clientes</a></li>
-                <li><a href="control?tarea=editarCliente">Editar Clientes</a></li>
-                <li><a href="control?tarea=eliminarCliente">Eliminar Clientes</a></li>
+                <li><a href="clientes.jsp">Clientes</a></li>
+                <li><a href="">Videojuegos</a></li>
+                <li><a href="">Rentas</a></li>
+                <li><a href="">Inventario</a></li>
             </ul>
         </nav>
         <article>
             <h1>Contenido Principal</h1>
-            Seleccione una opción de menu para administrar los clientes.
         </article>
         <footer>
-            Derechos Reservados
+            Derechos reservados
         </footer>
     </body>
 </html>

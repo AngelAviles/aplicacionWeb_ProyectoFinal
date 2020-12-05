@@ -39,31 +39,55 @@ public class obtenCliente extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
+            HttpSession session = request.getSession();
+            
             IPersistencia crud = new PersistenciaBD();
 
             String numCredencial = request.getParameter("cred");
+            String tareaSelec = (String) session.getAttribute("tarea");
 
             Cliente c = new Cliente(numCredencial);
 
             try {
                 Cliente clienteObtenido = crud.obten(c);
 
-                if (clienteObtenido == null) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("numCredencial", numCredencial);
-                    response.sendRedirect("capturaCliente.jsp");
-                } else {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("cliente", clienteObtenido);
-                    response.sendRedirect("desplegarCliente.jsp");
+                if (tareaSelec.equals("agregarCliente")) {
+
+                    if (clienteObtenido == null) {
+                        session.setAttribute("numCredencial", numCredencial);
+                        session.setAttribute("tarea", tareaSelec);
+                        response.sendRedirect("capturaCliente.jsp");
+                    } else {
+                        session.setAttribute("cliente", clienteObtenido);
+                        session.setAttribute("tarea", tareaSelec);
+                        response.sendRedirect("desplegarCliente.jsp");
+                    }
+
+                } else if (tareaSelec.equals("editarCliente")) {
+
+                    if (clienteObtenido == null) {
+                        session.setAttribute("dato", numCredencial);
+                        session.setAttribute("tarea", tareaSelec);
+                        session.setAttribute("error", "El cliente ingresado no existe.");
+                        response.sendRedirect("error.jsp");
+                    } else {
+                        session.setAttribute("cliente", clienteObtenido);
+                        session.setAttribute("numCredencial", clienteObtenido.getNumCredencial());
+                        session.setAttribute("tarea", tareaSelec);
+                        response.sendRedirect("capturaCliente.jsp");
+                    }
+
+                } else if (tareaSelec.equals("eliminarClientes")) {
+
                 }
+
             } catch (Exception e) {
                 response.sendRedirect("error.jsp");
             }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

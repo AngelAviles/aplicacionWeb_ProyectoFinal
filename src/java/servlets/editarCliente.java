@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control;
+package servlets;
 
+import interfaces.IPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,14 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import objetosNegocio.Cliente;
+import persistencia.PersistenciaBD;
 
 /**
  *
  * @author angel
  */
-@WebServlet(name = "control", urlPatterns = {"/control"})
-public class control extends HttpServlet {
+@WebServlet(name = "editarCliente", urlPatterns = {"/editarCliente"})
+public class editarCliente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,20 +36,23 @@ public class control extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            String tareaSelec = request.getParameter("tarea");
-            HttpSession session = request.getSession();
-            session.setAttribute("tarea", tareaSelec);
             
-            if (tareaSelec.equals("listarClientes")) {
+            IPersistencia crud = new PersistenciaBD();
+
+            String numCredencial = request.getParameter("cred");
+            String nombre = request.getParameter("nombre");
+            String telefono = request.getParameter("tel");
+            String direccion = request.getParameter("dir");
+
+            Cliente c = new Cliente(numCredencial, nombre, direccion, telefono);
+
+            try {
+                crud.actualizar(c);
                 response.sendRedirect("obtenClientes");
-            } else if (tareaSelec.equals("agregarCliente")) {
-                response.sendRedirect("capturaNumCredencial.jsp");
-            } else if (tareaSelec.equals("editarCliente")) {
-                response.sendRedirect("capturaNumCredencial.jsp");
-            } else if (tareaSelec.equals("eliminarCliente")) {
-                response.sendRedirect("capturaNumCredencial.jsp");
+            } catch (Exception e) {
+                response.sendRedirect("error.jsp");
             }
+            
         }
     }
 
