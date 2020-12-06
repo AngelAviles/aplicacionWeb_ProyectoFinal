@@ -9,6 +9,7 @@ import interfaces.IPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +41,7 @@ public class obtenCliente extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             HttpSession session = request.getSession();
-            
+
             IPersistencia crud = new PersistenciaBD();
 
             String numCredencial = request.getParameter("cred");
@@ -50,16 +51,18 @@ public class obtenCliente extends HttpServlet {
 
             try {
                 Cliente clienteObtenido = crud.obten(c);
+                session.setAttribute("tarea", tareaSelec);
 
                 if (tareaSelec.equals("agregarCliente")) {
 
                     if (clienteObtenido == null) {
                         session.setAttribute("numCredencial", numCredencial);
-                        session.setAttribute("tarea", tareaSelec);
+
                         response.sendRedirect("capturaCliente.jsp");
+
                     } else {
                         session.setAttribute("cliente", clienteObtenido);
-                        session.setAttribute("tarea", tareaSelec);
+
                         response.sendRedirect("desplegarCliente.jsp");
                     }
 
@@ -67,18 +70,29 @@ public class obtenCliente extends HttpServlet {
 
                     if (clienteObtenido == null) {
                         session.setAttribute("dato", numCredencial);
-                        session.setAttribute("tarea", tareaSelec);
                         session.setAttribute("error", "El cliente ingresado no existe.");
+
                         response.sendRedirect("error.jsp");
                     } else {
                         session.setAttribute("cliente", clienteObtenido);
                         session.setAttribute("numCredencial", clienteObtenido.getNumCredencial());
-                        session.setAttribute("tarea", tareaSelec);
+
                         response.sendRedirect("capturaCliente.jsp");
                     }
 
-                } else if (tareaSelec.equals("eliminarClientes")) {
+                } else if (tareaSelec.equals("eliminarCliente")) {
 
+                    if (clienteObtenido == null) {
+                        session.setAttribute("dato", numCredencial);
+                        session.setAttribute("error", "El cliente ingresado no existe.");
+
+                        response.sendRedirect("error.jsp");
+                    } else {
+                        session.setAttribute("cliente", clienteObtenido);
+                        session.setAttribute("numCredencial", clienteObtenido.getNumCredencial());
+
+                        response.sendRedirect("desplegarCliente.jsp");
+                    }
                 }
 
             } catch (Exception e) {

@@ -9,6 +9,7 @@
 
     String usuario = (String) session.getAttribute("elUsuario");
     List lista = (List) session.getAttribute("miListaClientes");
+    session.removeAttribute("miListaClientes");
 %>
 
 <!DOCTYPE html>

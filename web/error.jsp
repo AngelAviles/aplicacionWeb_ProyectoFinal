@@ -14,7 +14,9 @@
     String usuario = (String) session.getAttribute("elUsuario");
     String tarea = (String) session.getAttribute("tarea");
     String error = (String) session.getAttribute("error");
+    session.removeAttribute("error");
     String dato = (String) session.getAttribute("dato");
+    session.removeAttribute("dato");
     
     if (tarea.equals("agregarCliente")) {
         tarea = "Agregar Cliente";

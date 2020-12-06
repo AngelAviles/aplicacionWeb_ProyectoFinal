@@ -9,6 +9,7 @@ import interfaces.IPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,12 +48,18 @@ public class agregarCliente extends HttpServlet {
             String direccion = request.getParameter("dir");
 
             Cliente c = new Cliente(numCredencial, nombre, direccion, telefono);
+            
+            HttpSession session = request.getSession();
 
             try {
                 crud.agregar(c);
                 response.sendRedirect("obtenClientes");
             } catch (Exception e) {
+                session.setAttribute("dato", numCredencial);
+                session.setAttribute("tarea", "agregarCliente");
+                session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
                 response.sendRedirect("error.jsp");
+                
             }
         }
     }

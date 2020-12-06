@@ -7,20 +7,36 @@
         response.sendRedirect("login.jsp");
     }
 
+    String tareaSelec = (String) session.getAttribute("tarea");
+    String tarea = "";
+    if (tareaSelec.equals("agregarCliente")) {
+        tarea = "Agregar Cliente";
+    } else if (tareaSelec.equals("eliminarCliente")) {
+        tarea = "Eliminar Cliente";
+    }
+
     String usuario = (String) session.getAttribute("elUsuario");
     Cliente cliente = (Cliente) session.getAttribute("cliente");
+    session.removeAttribute("cliente");
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>El cliente ya existe - <%=usuario%></title>
+        <title><%=tarea%> - <%=usuario%></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="estilos/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <header>El cliente ya existe</header>
+        <header>
+            <%
+                if (tareaSelec.equalsIgnoreCase("agregarCliente")) {
+                    out.print("El cliente ya existe");
+                } else {
+                    out.print(tarea);
+                }
+            %></header>
         <nav>
             <ul>
                 <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
@@ -30,8 +46,12 @@
             </ul>
         </nav>
         <article>
-            <h1>El cliente ya existe</h1>
-            
+            <h1><% if (tareaSelec.equalsIgnoreCase("agregarCliente")) {
+                    out.print("El cliente ya existe");
+                } else {
+                    out.print(tarea);
+                }%></h1>
+
             <p>La siguiente información, le pertenece al cliente con el numero de credencial <%=cliente.getNumCredencial()%>:</p>
 
             <table>
@@ -50,7 +70,17 @@
                             + "<tr>"
                     );
                 %>
-            </table>           
+            </table>  
+            <%
+                if (tareaSelec.equalsIgnoreCase("eliminarCliente")) {
+                    session.setAttribute("cliente", cliente);
+                    out.print("<p>¿Deseas eliminar a este cliente?</p>"
+                            + "<form action=\"eliminarCliente\" >"
+                            + "<input type=\"submit\" value=\"Eliminar Cliente\" />"
+                            + "</form>"
+                    );
+                }
+            %>
         </article>
         <footer>
             Derechos Reservados

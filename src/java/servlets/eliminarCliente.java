@@ -8,7 +8,6 @@ package servlets;
 import interfaces.IPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,14 +15,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import objetosNegocio.Cliente;
 import persistencia.PersistenciaBD;
 
 /**
  *
  * @author angel
  */
-@WebServlet(name = "obtenClientes", urlPatterns = {"/obtenClientes"})
-public class obtenClientes extends HttpServlet {
+@WebServlet(name = "eliminarCliente", urlPatterns = {"/eliminarCliente"})
+public class eliminarCliente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,14 +39,21 @@ public class obtenClientes extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            IPersistencia crud = new PersistenciaBD();
-            List lista = crud.consultarClientes();
-
             HttpSession session = request.getSession();
-
-            session.setAttribute("miListaClientes", lista);
             
-            response.sendRedirect("desplegarClientes.jsp");
+            IPersistencia crud = new PersistenciaBD();
+            Cliente cliente = (Cliente) session.getAttribute("cliente");
+
+            try {
+                crud.eliminar(cliente);
+                response.sendRedirect("obtenClientes");
+            } catch (Exception e) {
+                session.setAttribute("dato", "");
+                session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
+                response.sendRedirect("error.jsp");
+
+            }
+
         }
     }
 

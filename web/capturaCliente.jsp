@@ -8,7 +8,9 @@
 
     String usuario = (String) session.getAttribute("elUsuario");
     String numCredencial = (String) session.getAttribute("numCredencial");
+    session.removeAttribute("numCredencial");
     Cliente cliente = (Cliente) session.getAttribute("cliente");
+    session.removeAttribute("cliente");
     String tareaSelec = (String) session.getAttribute("tarea");
 
     String tarea = "";
