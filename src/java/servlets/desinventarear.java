@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control;
+package servlets;
 
+import interfaces.IPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,13 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import objetosNegocio.Cliente;
+import objetosNegocio.Videojuego;
+import persistencia.PersistenciaBD;
 
 /**
  *
  * @author angel
  */
-@WebServlet(name = "control", urlPatterns = {"/control"})
-public class control extends HttpServlet {
+@WebServlet(name = "desinventarear", urlPatterns = {"/desinventarear"})
+public class desinventarear extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,27 +38,24 @@ public class control extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            String tareaSelec = request.getParameter("tarea");
-            HttpSession session = request.getSession();
-            session.setAttribute("tarea", tareaSelec);
             
-            if (tareaSelec.equals("listarClientes")) {
-                response.sendRedirect("obtenClientes");
-            } else if (tareaSelec.equals("agregarCliente")) {
-                response.sendRedirect("capturaNumCredencial.jsp");
-            } else if (tareaSelec.equals("editarCliente")) {
-                response.sendRedirect("capturaNumCredencial.jsp");
-            } else if (tareaSelec.equals("eliminarCliente")) {
-                response.sendRedirect("capturaNumCredencial.jsp");
-            } else if (tareaSelec.equals("inventarear")) {
-                response.sendRedirect("obtenVideojuegos");
-            } else if (tareaSelec.equals("desinventarear")) {
-                response.sendRedirect("obtenVideojuegos");
-            } else if (tareaSelec.equals("rentar")) {
-                response.sendRedirect("obtenVideojuegosDisponibles");
-            } else if (tareaSelec.equals("devolver")) {
-                response.sendRedirect("busquedaDeRentas.jsp");
+            IPersistencia crud = new PersistenciaBD();
+
+            String numCatalogo = request.getParameter("videojuego");
+            Videojuego v = new Videojuego(numCatalogo);
+            
+            int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+            
+            HttpSession session = request.getSession();
+
+            try {
+                crud.desinventariar(v, cantidad);
+                response.sendRedirect("obtenInventario");
+            } catch (Exception e) {
+                session.setAttribute("tarea", "desinventarear");
+                session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
+                response.sendRedirect("error.jsp");
+                
             }
         }
     }

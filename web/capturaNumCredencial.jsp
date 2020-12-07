@@ -28,7 +28,7 @@
         <link href="estilos/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <header><%=tarea%></header>
+        <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
                 <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
@@ -45,7 +45,7 @@
             </form>
         </article>
         <footer>
-            Derechos Reservados
+            <p>Derechos Reservados</p>
         </footer>
     </body>
 </html>

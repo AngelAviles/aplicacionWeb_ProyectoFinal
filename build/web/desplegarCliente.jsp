@@ -29,14 +29,8 @@
         <link href="estilos/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <header>
-            <%
-                if (tareaSelec.equalsIgnoreCase("agregarCliente")) {
-                    out.print("El cliente ya existe");
-                } else {
-                    out.print(tarea);
-                }
-            %></header>
+        <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
+        
         <nav>
             <ul>
                 <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
@@ -83,7 +77,7 @@
             %>
         </article>
         <footer>
-            Derechos Reservados
+            <p>Derechos Reservados</p>
         </footer>
     </body>
 </html>

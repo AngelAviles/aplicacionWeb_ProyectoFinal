@@ -23,20 +23,20 @@
         <link href="estilos/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <header>Bienvenido a mi aplicacion web</header>
+        <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
                 <li><a href="clientes.jsp">Clientes</a></li>
-                <li><a href="">Videojuegos</a></li>
-                <li><a href="">Rentas</a></li>
-                <li><a href="">Inventario</a></li>
+                <li><a href="videojuegos.jsp">Videojuegos</a></li>
+                <li><a href="rentas.jsp">Rentas</a></li>
+                <li><a href="inventario.jsp">Inventario</a></li>
             </ul>
         </nav>
         <article>
             <h1>Contenido Principal</h1>
         </article>
         <footer>
-            Derechos reservados
+            <p>Derechos reservados</p>
         </footer>
     </body>
 </html>

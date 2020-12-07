@@ -43,10 +43,15 @@ public class obtenClientes extends HttpServlet {
             List lista = crud.consultarClientes();
 
             HttpSession session = request.getSession();
+            String tareaSelec = (String) session.getAttribute("tarea");
 
-            session.setAttribute("miListaClientes", lista);
+            session.setAttribute("listaClientes", lista);
             
+            if (tareaSelec.equalsIgnoreCase("rentar")) {
+                response.sendRedirect("capturarRenta.jsp");
+            } else {
             response.sendRedirect("desplegarClientes.jsp");
+            }
         }
     }
 

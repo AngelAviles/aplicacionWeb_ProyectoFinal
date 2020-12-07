@@ -3,23 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control;
+package servlets;
 
+import interfaces.IPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import objetosNegocio.Cliente;
+import objetosNegocio.Videojuego;
+import objetosServicio.Fecha;
+import objetosServicio.Periodo;
+import persistencia.PersistenciaBD;
 
 /**
  *
  * @author angel
  */
-@WebServlet(name = "control", urlPatterns = {"/control"})
-public class control extends HttpServlet {
+@WebServlet(name = "obtenRentas", urlPatterns = {"/obtenRentas"})
+public class obtenRentas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,27 +43,38 @@ public class control extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String tareaSelec = request.getParameter("tarea");
             HttpSession session = request.getSession();
-            session.setAttribute("tarea", tareaSelec);
-            
-            if (tareaSelec.equals("listarClientes")) {
-                response.sendRedirect("obtenClientes");
-            } else if (tareaSelec.equals("agregarCliente")) {
-                response.sendRedirect("capturaNumCredencial.jsp");
-            } else if (tareaSelec.equals("editarCliente")) {
-                response.sendRedirect("capturaNumCredencial.jsp");
-            } else if (tareaSelec.equals("eliminarCliente")) {
-                response.sendRedirect("capturaNumCredencial.jsp");
-            } else if (tareaSelec.equals("inventarear")) {
-                response.sendRedirect("obtenVideojuegos");
-            } else if (tareaSelec.equals("desinventarear")) {
-                response.sendRedirect("obtenVideojuegos");
-            } else if (tareaSelec.equals("rentar")) {
-                response.sendRedirect("obtenVideojuegosDisponibles");
-            } else if (tareaSelec.equals("devolver")) {
-                response.sendRedirect("busquedaDeRentas.jsp");
+            String cliente = (String) request.getParameter("cliente");
+            String videojuego = (String) request.getParameter("videojuego");
+            String desde = (String) request.getParameter("desde");
+            String hasta = (String) request.getParameter("hasta");
+
+            IPersistencia crud = new PersistenciaBD();
+
+            List lista = null;
+            if (!cliente.equalsIgnoreCase("")) {
+                Cliente c = new Cliente(cliente);
+                lista = crud.consultarRentasVideojuegos(c);
+            } else if (!videojuego.equalsIgnoreCase("")) {
+                Videojuego v = new Videojuego(videojuego);
+                lista = crud.consultarRentas(v);
+            } else if (!desde.equalsIgnoreCase("") && !hasta.equalsIgnoreCase("")) {
+                String[] anioMesDiaDesde = desde.split("-");
+                Date dateDesde = new Date(Integer.parseInt(anioMesDiaDesde[0]) - 1900, Integer.parseInt(anioMesDiaDesde[1]) - 1, Integer.parseInt(anioMesDiaDesde[2]));
+                Fecha fechaDesde = new Fecha(dateDesde);
+                
+                String[] anioMesDiaHasta = hasta.split("-");
+                Date dateHasta = new Date(Integer.parseInt(anioMesDiaHasta[0]) - 1900, Integer.parseInt(anioMesDiaHasta[1]) - 1, Integer.parseInt(anioMesDiaHasta[2]));
+                Fecha fechaHasta = new Fecha(dateHasta);
+                
+                Periodo periodo = new Periodo(fechaDesde, fechaHasta);
+                
+                lista = crud.consultarRentasVideojuegos(periodo);
             }
+
+            session.setAttribute("listaRentas", lista);
+
+            response.sendRedirect("desplegarRentasEncontradas.jsp");
         }
     }
 

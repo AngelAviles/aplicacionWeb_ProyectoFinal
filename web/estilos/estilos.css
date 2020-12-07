@@ -26,7 +26,8 @@ nav {
     background-color: lightgray;
     font-size: 30px;
     padding: 15px;
-    height: 300px;
+    height: auto;
+    min-height: 300px;
 }
 
 nav ul {
@@ -44,12 +45,66 @@ nav ul a:hover{
 
 article {
     width: 80%;
-    height: 300px;
+    height: auto;
+    min-height: 300px;
     float: left;
 }
 
-input {
-  width: 10em;
-  float: left;
-  clear: left; 
+form{
+    width: 60%;
+    padding: 16px;
+    border-radius: 10px;
+    margin: 1% auto;
+    background-color: #ccc;
+    display: grid;
 }
+
+form label{
+    width:100%;
+    font-weight:bold;
+    display:inline-block;
+}
+
+form input[type="text"], input[type="password"]{
+    width:100%;
+    padding:3px 10px;
+    border:1px solid #f6f6f6;
+    border-radius:3px;
+    background-color:#f6f6f6;
+    margin:8px auto;
+    display:inline-block;
+}
+
+form input[type="submit"]{
+    width:100%;
+    padding:8px 16px;
+    margin-top:32px;
+    border:1px solid #000;
+    border-radius:5px;
+    display:block;
+    color:#fff;
+    background-color:#000;
+} 
+
+form input[type="submit"]:hover{
+    cursor:pointer;
+}
+
+table {
+    width: 60%;
+    padding: 16px;
+    border-radius: 10px;
+    margin: 1% auto;
+    background-color: #ccc;
+}
+
+tr {
+    width:100%;
+}
+
+footer {
+    clear: both;
+    margin: 0;
+    text-align: center;
+}
+

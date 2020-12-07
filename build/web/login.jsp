@@ -24,6 +24,6 @@
         </form>
     </body>
     <footer>
-        Derechos reservados
+        <p>Derechos reservados</p>
     </footer>
 </html>

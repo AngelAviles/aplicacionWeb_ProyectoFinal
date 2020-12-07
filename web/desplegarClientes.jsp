@@ -8,8 +8,8 @@
     }
 
     String usuario = (String) session.getAttribute("elUsuario");
-    List lista = (List) session.getAttribute("miListaClientes");
-    session.removeAttribute("miListaClientes");
+    List lista = (List) session.getAttribute("listaClientes");
+    session.removeAttribute("listaClientes");
 %>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
         <link href="estilos/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <header>Listado de Clientes</header>
+        <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
                 <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
@@ -56,7 +56,7 @@
             </table>           
         </article>
         <footer>
-            Derechos Reservados
+            <p>Derechos Reservados</p>
         </footer>
     </body>
 </html>
