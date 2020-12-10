@@ -19,7 +19,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "obtenInventario", urlPatterns = {"/obtenInventario"})
 public class obtenInventario extends HttpServlet {
@@ -37,14 +37,14 @@ public class obtenInventario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             IPersistencia crud = new PersistenciaBD();
             List listaInventario = crud.consultarInventarioVideojuegos();
 
             HttpSession session = request.getSession();
 
             session.setAttribute("listaInventario", listaInventario);
-            
+
             response.sendRedirect("desplegarInventario.jsp");
         }
     }

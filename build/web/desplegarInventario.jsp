@@ -7,7 +7,7 @@
     if (session.getAttribute("elUsuario") == null) {
         response.sendRedirect("login.jsp");
     }
-    
+
     String tareaSelec = (String) session.getAttribute("tarea");
 
     String tarea = "";
@@ -35,8 +35,10 @@
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
-                <li><a href="control?tarea=inventarear">Inventarear</a></li>
-                <li><a href="control?tarea=desinventarear">Desinventarear</a></li>
+                <fieldset>
+                    <li><a href="control?tarea=inventarear" >Inventarear</a></li>
+                    <li><a href="control?tarea=desinventarear" >Desinventarear</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
@@ -61,8 +63,6 @@
                 %>
             </table>           
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>

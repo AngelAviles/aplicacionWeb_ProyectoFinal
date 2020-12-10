@@ -30,13 +30,15 @@
     </head>
     <body>
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
-        
+
         <nav>
             <ul>
-                <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
-                <li><a href="control?tarea=agregarCliente">Agregar Clientes</a></li>
-                <li><a href="control?tarea=editarCliente">Editar Clientes</a></li>
-                <li><a href="control?tarea=eliminarCliente">Eliminar Clientes</a></li>
+                <fieldset>
+                    <li><a href="control?tarea=listarClientes" >Listar Clientes</a></li>
+                    <li><a href="control?tarea=agregarCliente" >Agregar Clientes</a></li>
+                    <li><a href="control?tarea=editarCliente" >Editar Clientes</a></li>
+                    <li><a href="control?tarea=eliminarCliente" >Eliminar Clientes</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
@@ -52,15 +54,15 @@
                 <thead>
                 <th>Credencial</th>
                 <th>Nombre</th>
-                <th>Telefono</th>
                 <th>Direccion</th>
+                <th>Telefono</th>
                 </thead>
                 <%
                     out.print("<tr>"
                             + "<td>" + cliente.getNumCredencial() + "</td>"
                             + "<td>" + cliente.getNombre() + "</td>"
-                            + "<td>" + cliente.getTelefono() + "</td>"
                             + "<td>" + cliente.getDireccion() + "</td>"
+                            + "<td>" + cliente.getTelefono() + "</td>"
                             + "<tr>"
                     );
                 %>
@@ -76,8 +78,6 @@
                 }
             %>
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>

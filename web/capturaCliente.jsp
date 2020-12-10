@@ -1,7 +1,7 @@
 <%@page import="objetosNegocio.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%    
+<%
     if (session.getAttribute("elUsuario") == null) {
         response.sendRedirect("login.jsp");
     }
@@ -34,23 +34,31 @@
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
-                <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
-                <li><a href="control?tarea=agregarCliente">Agregar Clientes</a></li>
-                <li><a href="control?tarea=editarCliente">Editar Clientes</a></li>
-                <li><a href="control?tarea=eliminarCliente">Eliminar Clientes</a></li>
+                <fieldset>
+                    <li><a href="control?tarea=listarClientes" >Listar Clientes</a></li>
+                    <li><a href="control?tarea=agregarCliente" >Agregar Clientes</a></li>
+                    <li><a href="control?tarea=editarCliente" >Editar Clientes</a></li>
+                    <li><a href="control?tarea=eliminarCliente" >Eliminar Clientes</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
+            <h1><%=tarea%></h1>
+
             <form action=<%=tareaSelec%>>
-                <input type="text" name="cred" placeholder="Num. Credencial" value=<%=numCredencial%> readonly="readonly" />
-                <input type="text" name="nombre" placeholder="Nombre" <% if (cliente != null) out.print("value=" + cliente.getNombre()); %> />
-                <input type="text" name="dir" placeholder="Dirección" <% if (cliente != null) out.print("value=" + cliente.getDireccion()); %> />
-                <input type="text" name="tel" placeholder="Telefono" <% if (cliente != null) out.print("value=" + cliente.getTelefono()); %> />
+                <input type="text" name="cred" placeholder="Num. Credencial" value=<%=numCredencial%> readonly="readonly" requiered/>
+                <input type="text" name="nombre" placeholder="Nombre" <% if (cliente != null) {
+                        out.print("value=" + cliente.getNombre());
+                    } %> requiered/>
+                <input type="text" name="dir" placeholder="Dirección" <% if (cliente != null) {
+                        out.print("value=" + cliente.getDireccion());
+                    } %> requiered/>
+                <input type="text" name="tel" placeholder="Telefono" <% if (cliente != null) {
+                        out.print("value=" + cliente.getTelefono());
+                    }%> requiered/>
                 <input type="submit" value=<%=tarea%> />
             </form>
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>

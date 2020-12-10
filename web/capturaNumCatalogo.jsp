@@ -10,18 +10,21 @@
     String tareaSelec = (String) session.getAttribute("tarea");
     String tarea = "";
 
-    if (tareaSelec.equals("agregarCliente")) {
-        tarea = "Agregar Cliente";
-    } else if (tareaSelec.equals("editarCliente")) {
-        tarea = "Editar Cliente";
-    } else if (tareaSelec.equals("eliminarCliente")) {
-        tarea = "Eliminar Cliente";
+    if (tareaSelec.equals("agregarVideojuego")) {
+        tarea = "Agregar Videojuego";
+
+    } else if (tareaSelec.equals("editarVideojuego")) {
+        tarea = "Editar Videojuego";
+
+    } else if (tareaSelec.equals("eliminarVideojuego")) {
+        tarea = "Eliminar Videojuego";
     }
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
+
         <title><%=tarea%> - <%=usuario%></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,18 +35,18 @@
         <nav>
             <ul>
                 <fieldset>
-                    <li><a href="control?tarea=listarClientes" >Listar Clientes</a></li>
-                    <li><a href="control?tarea=agregarCliente" >Agregar Clientes</a></li>
-                    <li><a href="control?tarea=editarCliente" >Editar Clientes</a></li>
-                    <li><a href="control?tarea=eliminarCliente" >Eliminar Clientes</a></li>
+                    <li><a href="control?tarea=listarVideojuegos" >Listar Videojuegos</a></li>
+                    <li><a href="control?tarea=agregarVideojuego" >Agregar Videojuegos</a></li>
+                    <li><a href="control?tarea=editarVideojuego" >Editar Videojuegos</a></li>
+                    <li><a href="control?tarea=eliminarVideojuego" >Eliminar Videojuegos</a></li>
                 </fieldset>
             </ul>
         </nav>
         <article>
             <h1><%=tarea%></h1>
 
-            <form action="obtenCliente">
-                <input type="text" name="cred" placeholder="Num. Credencial" />
+            <form action="obtenVideojuego">
+                <input type="text" name="numCatalogo" placeholder="Num. Catalogo" required/>
 
                 <input type="submit" value="Comprobar" />
             </form>

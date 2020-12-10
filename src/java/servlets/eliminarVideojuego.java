@@ -8,7 +8,7 @@ package servlets;
 import interfaces.IPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,17 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import objetosNegocio.Cliente;
-import objetosNegocio.Renta;
 import objetosNegocio.Videojuego;
-import objetosServicio.Fecha;
 import persistencia.PersistenciaBD;
 
 /**
  *
  * @author Angel Aviles/Gildardo Ortega
  */
-@WebServlet(name = "devolver", urlPatterns = {"/devolver"})
-public class devolver extends HttpServlet {
+@WebServlet(name = "eliminarVideojuego", urlPatterns = {"/eliminarVideojuego"})
+public class eliminarVideojuego extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,33 +40,21 @@ public class devolver extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            IPersistencia crud = new PersistenciaBD();
-
-            String numCredencial = request.getParameter("cliente");
-            Cliente c = new Cliente(numCredencial);
-
-            String numCatalogo = request.getParameter("articulo");
-            Videojuego v = new Videojuego(numCatalogo);
-
-            String fecha = request.getParameter("fecha");
-            String[] anioMesDia = fecha.split("-");
-            Date date = new Date(Integer.parseInt(anioMesDia[0]), Integer.parseInt(anioMesDia[1]) - 1, Integer.parseInt(anioMesDia[2]));
-            Fecha f = new Fecha(date);
-
-            int dias = Integer.parseInt(request.getParameter("tiempoRenta"));
-
-            Renta renta = new Renta(c, v, f, dias);
-
             HttpSession session = request.getSession();
 
+            IPersistencia crud = new PersistenciaBD();
+            Videojuego videojuego = (Videojuego) session.getAttribute("videojuego");
+
             try {
-                crud.devolverVideojuego(renta);
-                response.sendRedirect("obtenRentasVideojuegos");
+                crud.eliminar(videojuego);
+                response.sendRedirect("obtenVideojuegos");
             } catch (Exception e) {
-                session.setAttribute("tarea", "devolver");
+                session.setAttribute("dato", "");
                 session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
                 response.sendRedirect("error.jsp");
+
             }
+
         }
     }
 

@@ -20,7 +20,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "editarCliente", urlPatterns = {"/editarCliente"})
 public class editarCliente extends HttpServlet {
@@ -38,7 +38,7 @@ public class editarCliente extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             IPersistencia crud = new PersistenciaBD();
 
             String numCredencial = request.getParameter("cred");
@@ -49,15 +49,15 @@ public class editarCliente extends HttpServlet {
             Cliente c = new Cliente(numCredencial, nombre, direccion, telefono);
 
             HttpSession session = request.getSession();
-            
+
             try {
                 crud.actualizar(c);
                 response.sendRedirect("obtenClientes");
             } catch (Exception e) {
                 response.sendRedirect("error.jsp");
-                
+
             }
-            
+
         }
     }
 

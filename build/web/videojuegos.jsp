@@ -11,7 +11,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Menu de Invantario - <%=usuario%></title>
+
+        <title>Menu de Videojuegos - <%=usuario%></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="estilos/estilos.css" rel="stylesheet" type="text/css"/>
@@ -21,14 +22,16 @@
         <nav>
             <ul>
                 <fieldset>
-                    <li><a href="control?tarea=inventarear" >Inventarear</a></li>
-                    <li><a href="control?tarea=desinventarear" >Desinventarear</a></li>
+                    <li><a href="control?tarea=listarVideojuegos"  >Listar Videojuegos</a></li>
+                    <li><a href="control?tarea=agregarVideojuego"  >Agregar Videojuegos</a></li>
+                    <li><a href="control?tarea=editarVideojuego" >Editar Videojuegos</a></li>
+                    <li><a href="control?tarea=eliminarVideojuego" >Eliminar Videojuegos</a></li>
                 </fieldset>
             </ul>
         </nav>
         <article>
-            <h1>Menu de Inventario</h1>
-            <p>Seleccione una opción de menu para administrar el inventario.</p>
+            <h1>Menu de Videojuegos</h1>
+            <p>Seleccione una opción de menu para administrar los Videojuegos.</p>
         </article>
 
     </body>

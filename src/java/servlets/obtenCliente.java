@@ -21,7 +21,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "obtenCliente", urlPatterns = {"/obtenCliente"})
 public class obtenCliente extends HttpServlet {

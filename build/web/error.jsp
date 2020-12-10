@@ -10,14 +10,14 @@
     if (session.getAttribute("elUsuario") == null) {
         response.sendRedirect("login.jsp");
     }
-    
+
     String usuario = (String) session.getAttribute("elUsuario");
     String tarea = (String) session.getAttribute("tarea");
     String error = (String) session.getAttribute("error");
     session.removeAttribute("error");
     String dato = (String) session.getAttribute("dato");
     session.removeAttribute("dato");
-    
+
     if (tarea.equals("agregarCliente")) {
         tarea = "Agregar Cliente";
     } else if (tarea.equals("editarCliente")) {
@@ -39,18 +39,18 @@
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
-                <li><a href="clientes.jsp">Clientes</a></li>
-                <li><a href="videojuegos.jsp">Videojuegos</a></li>
-                <li><a href="rentas.jsp">Rentas</a></li>
-                <li><a href="inventario.jsp">Inventario</a></li>
+                <fieldset>
+                    <li><a href="clientes.jsp" >Clientes</a></li>
+                    <li><a href="videojuegos.jsp" >Videojuegos</a></li>
+                    <li><a href="rentas.jsp" >Rentas</a></li>
+                    <li><a href="inventario.jsp">Inventario</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
             <h1><%=error%></h1>
             <p>Dato ingresado: <%=dato%></p>
         </article>
-        <footer>
-            <p>Derechos reservados</p>
-        </footer>
+
     </body>
 </html>

@@ -20,7 +20,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "obtenClientes", urlPatterns = {"/obtenClientes"})
 public class obtenClientes extends HttpServlet {
@@ -46,11 +46,11 @@ public class obtenClientes extends HttpServlet {
             String tareaSelec = (String) session.getAttribute("tarea");
 
             session.setAttribute("listaClientes", lista);
-            
+
             if (tareaSelec.equalsIgnoreCase("rentar")) {
                 response.sendRedirect("capturarRenta.jsp");
             } else {
-            response.sendRedirect("desplegarClientes.jsp");
+                response.sendRedirect("desplegarClientes.jsp");
             }
         }
     }

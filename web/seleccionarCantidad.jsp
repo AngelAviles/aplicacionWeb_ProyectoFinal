@@ -33,11 +33,15 @@
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
-                <li><a href="control?tarea=inventarear">Inventarear</a></li>
-                <li><a href="control?tarea=desinventarear">Desinventarear</a></li>
+                <fieldset>
+                    <li><a href="control?tarea=inventarear" >Inventarear</a></li>
+                    <li><a href="control?tarea=desinventarear" >Desinventarear</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
+            <h1><%=tarea%></h1>
+
             <form action=<%=tareaSelec%>>
                 <label for="videojuego">Escoge un videojuego para <%=tareaSelec%>:</label>
                 <select id="videojuego" name="videojuego" required>
@@ -48,15 +52,13 @@
                         }
                     %>
                 </select>
-                
+
                 <label for="cantidad">Ingrese la cantidad ha <%=tareaSelec%>: </label>
                 <input id="cantidad" type="number" name="cantidad" value="0" step="1" requiered>
-                
+
                 <input type="submit" value=<%=tarea%> />
             </form>
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>

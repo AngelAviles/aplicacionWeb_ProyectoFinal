@@ -20,7 +20,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "inventarear", urlPatterns = {"/inventarear"})
 public class inventarear extends HttpServlet {
@@ -38,14 +38,14 @@ public class inventarear extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             IPersistencia crud = new PersistenciaBD();
 
             String numCatalogo = request.getParameter("videojuego");
             Videojuego v = new Videojuego(numCatalogo);
-            
+
             int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-            
+
             HttpSession session = request.getSession();
 
             try {
@@ -55,7 +55,7 @@ public class inventarear extends HttpServlet {
                 session.setAttribute("tarea", "inventarear");
                 session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
                 response.sendRedirect("error.jsp");
-                
+
             }
         }
     }

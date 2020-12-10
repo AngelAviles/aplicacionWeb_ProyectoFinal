@@ -36,8 +36,11 @@
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
-                <li><a href="control?tarea=rentar">Rentar</a></li>
-                <li><a href="control?tarea=devolver">Devolver</a></li>
+                <fieldset>
+
+                    <li><a href="control?tarea=rentar" >Rentar</a></li>
+                    <li><a href="control?tarea=devolver" >Devolver</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
@@ -75,8 +78,6 @@
                     %>
             </table>           
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>

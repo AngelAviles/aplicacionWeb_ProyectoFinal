@@ -4,7 +4,7 @@
     if (session.getAttribute("elUsuario") == null) {
         response.sendRedirect("login.jsp");
     }
-    
+
     String usuario = (String) session.getAttribute("elUsuario");
 %>
 
@@ -20,18 +20,18 @@
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
-                <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
-                <li><a href="control?tarea=agregarCliente">Agregar Clientes</a></li>
-                <li><a href="control?tarea=editarCliente">Editar Clientes</a></li>
-                <li><a href="control?tarea=eliminarCliente">Eliminar Clientes</a></li>
+                <fieldset>
+                    <li><a href="control?tarea=listarClientes" >Listar Clientes</a></li>
+                    <li><a href="control?tarea=agregarCliente"  >Agregar Clientes</a></li>
+                    <li><a href="control?tarea=editarCliente">Editar Clientes</a></li>
+                    <li><a href="control?tarea=eliminarCliente" >Eliminar Clientes</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
             <h1>Menu de Clientes</h1>
             <p>Seleccione una opción de menu para administrar los clientes.</p>
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>

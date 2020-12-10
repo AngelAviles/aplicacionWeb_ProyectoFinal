@@ -23,7 +23,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "rentar", urlPatterns = {"/rentar"})
 public class rentar extends HttpServlet {
@@ -41,7 +41,7 @@ public class rentar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             IPersistencia crud = new PersistenciaBD();
 
             String numCredencial = request.getParameter("cliente");
@@ -54,7 +54,7 @@ public class rentar extends HttpServlet {
             String[] anioMesDia = fecha.split("-");
             Date date = new Date(Integer.parseInt(anioMesDia[0]) - 1900, Integer.parseInt(anioMesDia[1]) - 1, Integer.parseInt(anioMesDia[2]));
             Fecha f = new Fecha(date);
-            
+
             int dias = Integer.parseInt(request.getParameter("dias"));
 
             Renta renta = new Renta(c, v, f, dias);

@@ -46,15 +46,15 @@ public class obtenVideojuegosDisponibles extends HttpServlet {
             listaVideojuegos = crud.consultarVideojuegosDisponibles();
 
             session.setAttribute("listaVideojuegos", listaVideojuegos);
-            
+
             String tareaSelec = (String) session.getAttribute("tarea");
 
             if (tareaSelec.equalsIgnoreCase("rentar")) {
                 response.sendRedirect("obtenClientes");
             } else if (tareaSelec.equalsIgnoreCase("devolver")) {
-                
+
             }
-            
+
         }
     }
 

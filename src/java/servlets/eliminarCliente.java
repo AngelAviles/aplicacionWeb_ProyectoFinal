@@ -20,7 +20,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "eliminarCliente", urlPatterns = {"/eliminarCliente"})
 public class eliminarCliente extends HttpServlet {
@@ -40,7 +40,7 @@ public class eliminarCliente extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             HttpSession session = request.getSession();
-            
+
             IPersistencia crud = new PersistenciaBD();
             Cliente cliente = (Cliente) session.getAttribute("cliente");
 

@@ -19,7 +19,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "obtenVideojuegos", urlPatterns = {"/obtenVideojuegos"})
 public class obtenVideojuegos extends HttpServlet {
@@ -48,7 +48,21 @@ public class obtenVideojuegos extends HttpServlet {
 
             session.setAttribute("listaVideojuegos", listaVideojuegos);
 
-            response.sendRedirect("seleccionarCantidad.jsp");
+            //te mandara directo a desplegar videojuegos pra poder visualizar los videojuegos en el invetnario
+            if (tareaSelec.equals("listarVideojuegos")) {
+                response.sendRedirect("desplegarVideojuegos.jsp");
+
+            } else if (tareaSelec.equals("agregarVideojuego")) {
+                response.sendRedirect("desplegarVideojuegos.jsp");
+            } else if (tareaSelec.equals("eliminarVideojuego")) {
+                response.sendRedirect("desplegarVideojuegos.jsp");
+            } else if (tareaSelec.equals("editarVideojuego")) {
+                response.sendRedirect("desplegarVideojuegos.jsp");
+
+            } else {
+                response.sendRedirect("seleccionarCantidad.jsp");
+            }
+
         }
     }
 

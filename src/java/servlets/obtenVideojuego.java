@@ -8,7 +8,8 @@ package servlets;
 import interfaces.IPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,17 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import objetosNegocio.Cliente;
-import objetosNegocio.Renta;
 import objetosNegocio.Videojuego;
-import objetosServicio.Fecha;
 import persistencia.PersistenciaBD;
 
 /**
  *
  * @author Angel Aviles/Gildardo Ortega
  */
-@WebServlet(name = "devolver", urlPatterns = {"/devolver"})
-public class devolver extends HttpServlet {
+@WebServlet(name = "obtenVideojuego", urlPatterns = {"/obtenVideojuego"})
+public class obtenVideojuego extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,37 +41,68 @@ public class devolver extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            IPersistencia crud = new PersistenciaBD();
-
-            String numCredencial = request.getParameter("cliente");
-            Cliente c = new Cliente(numCredencial);
-
-            String numCatalogo = request.getParameter("articulo");
-            Videojuego v = new Videojuego(numCatalogo);
-
-            String fecha = request.getParameter("fecha");
-            String[] anioMesDia = fecha.split("-");
-            Date date = new Date(Integer.parseInt(anioMesDia[0]), Integer.parseInt(anioMesDia[1]) - 1, Integer.parseInt(anioMesDia[2]));
-            Fecha f = new Fecha(date);
-
-            int dias = Integer.parseInt(request.getParameter("tiempoRenta"));
-
-            Renta renta = new Renta(c, v, f, dias);
-
             HttpSession session = request.getSession();
 
+            IPersistencia crud = new PersistenciaBD();
+
+            String numCatalogo = request.getParameter("numCatalogo");
+            String tareaSelec = (String) session.getAttribute("tarea");
+
+            Videojuego v = new Videojuego(numCatalogo);
+
             try {
-                crud.devolverVideojuego(renta);
-                response.sendRedirect("obtenRentasVideojuegos");
+                Videojuego videojuegoObtenido = crud.obten(v);
+                session.setAttribute("tarea", tareaSelec);
+
+                if (tareaSelec.equals("agregarVideojuego")) {
+
+                    if (videojuegoObtenido == null) {
+                        session.setAttribute("numCatalogo", numCatalogo);
+
+                        response.sendRedirect("capturaVideojuego.jsp");
+
+                    } else {
+                        session.setAttribute("videojuego", videojuegoObtenido);
+
+                        response.sendRedirect("desplegarVideojuego.jsp");
+                    }
+
+                } else if (tareaSelec.equals("editarVideojuego")) {
+
+                    if (videojuegoObtenido == null) {
+                        session.setAttribute("dato", numCatalogo);
+                        session.setAttribute("error", "El Videojuego ingresado no existe.");
+
+                        response.sendRedirect("error.jsp");
+                    } else {
+                        session.setAttribute("videojuego", videojuegoObtenido);
+                        session.setAttribute("numCatalogo", videojuegoObtenido.getNumCatalogo());
+
+                        response.sendRedirect("capturaVideojuego.jsp");
+                    }
+
+                } else if (tareaSelec.equals("eliminarVideojuego")) {
+
+                    if (videojuegoObtenido == null) {
+                        session.setAttribute("dato", numCatalogo);
+                        session.setAttribute("error", "El Videojuego ingresado no existe.");
+
+                        response.sendRedirect("error.jsp");
+                    } else {
+                        session.setAttribute("videojuego", videojuegoObtenido);
+                        session.setAttribute("numCatalogo", videojuegoObtenido.getNumCatalogo());
+
+                        response.sendRedirect("desplegarVideojuego.jsp");
+                    }
+                }
+
             } catch (Exception e) {
-                session.setAttribute("tarea", "devolver");
-                session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
                 response.sendRedirect("error.jsp");
             }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

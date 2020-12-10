@@ -24,10 +24,12 @@
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
-                <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
-                <li><a href="control?tarea=agregarCliente">Agregar Clientes</a></li>
-                <li><a href="control?tarea=editarCliente">Editar Clientes</a></li>
-                <li><a href="control?tarea=eliminarCliente">Eliminar Clientes</a></li>
+                <fieldset>
+                    <li><a href="control?tarea=listarClientes" >Listar Clientes</a></li>
+                    <li><a href="control?tarea=agregarCliente" >Agregar Clientes</a></li>
+                    <li><a href="control?tarea=editarCliente" >Editar Clientes</a></li>
+                    <li><a href="control?tarea=eliminarCliente" >Eliminar Clientes</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
@@ -37,8 +39,8 @@
                 <thead>
                 <th>Credencial</th>
                 <th>Nombre</th>
-                <th>Telefono</th>
                 <th>Direccion</th>
+                <th>Telefono</th>
                 </thead>
                 <%
                     for (int i = 0; i < lista.size(); i++) {
@@ -46,8 +48,8 @@
                         out.print("<tr>"
                                 + "<td>" + c.getNumCredencial() + "</td>"
                                 + "<td>" + c.getNombre() + "</td>"
-                                + "<td>" + c.getTelefono() + "</td>"
                                 + "<td>" + c.getDireccion() + "</td>"
+                                + "<td>" + c.getTelefono() + "</td>"
                                 + "<tr>"
                         );
                     }
@@ -55,8 +57,6 @@
                 %>
             </table>           
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>

@@ -8,7 +8,7 @@
     String usuario = (String) session.getAttribute("elUsuario");
 
     String tareaSelec = (String) session.getAttribute("tarea");
-    String tarea = "";    
+    String tarea = "";
 
     if (tareaSelec.equals("agregarCliente")) {
         tarea = "Agregar Cliente";
@@ -31,21 +31,23 @@
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
-                <li><a href="control?tarea=listarClientes">Listar Clientes</a></li>
-                <li><a href="control?tarea=agregarCliente">Agregar Clientes</a></li>
-                <li><a href="control?tarea=editarCliente">Editar Clientes</a></li>
-                <li><a href="control?tarea=eliminarCliente">Eliminar Clientes</a></li>
+                <fieldset>
+                    <li><a href="control?tarea=listarClientes" >Listar Clientes</a></li>
+                    <li><a href="control?tarea=agregarCliente" >Agregar Clientes</a></li>
+                    <li><a href="control?tarea=editarCliente" >Editar Clientes</a></li>
+                    <li><a href="control?tarea=eliminarCliente" >Eliminar Clientes</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
+            <h1><%=tarea%></h1>
+
             <form action="obtenCliente">
                 <input type="text" name="cred" placeholder="Num. Credencial" />
 
                 <input type="submit" value="Comprobar" />
             </form>
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>

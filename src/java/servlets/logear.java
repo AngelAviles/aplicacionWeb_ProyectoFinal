@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "logear", urlPatterns = {"/logear"})
 public class logear extends HttpServlet {
@@ -34,15 +34,15 @@ public class logear extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             String usuario = request.getParameter("usuario");
             String password = request.getParameter("contra");
-            
-            if(usuario.equals("ramses") && password.equals("1234")) {
-                
+
+            if (usuario.equals("ramses") && password.equals("1234")) {
+
                 HttpSession session = request.getSession();
                 session.setAttribute("elUsuario", usuario);
-                
+
                 response.sendRedirect("menu.jsp");
             } else {
                 response.sendRedirect("login.jsp");

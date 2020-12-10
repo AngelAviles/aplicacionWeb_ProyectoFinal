@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "control", urlPatterns = {"/control"})
 public class control extends HttpServlet {
@@ -38,11 +38,28 @@ public class control extends HttpServlet {
             String tareaSelec = request.getParameter("tarea");
             HttpSession session = request.getSession();
             session.setAttribute("tarea", tareaSelec);
-            
+
             if (tareaSelec.equals("listarClientes")) {
                 response.sendRedirect("obtenClientes");
             } else if (tareaSelec.equals("agregarCliente")) {
                 response.sendRedirect("capturaNumCredencial.jsp");
+
+                //AgregarVideojuego
+            } else if (tareaSelec.equals("agregarVideojuego")) {
+                response.sendRedirect("capturaNumCatalogo.jsp");
+
+                //Eliminar Videojuego
+            } else if (tareaSelec.equals("eliminarVideojuego")) {
+                response.sendRedirect("capturaNumCatalogo.jsp");
+
+                //listar Videojuegos
+            } else if (tareaSelec.equals("listarVideojuegos")) {
+                response.sendRedirect("obtenVideojuegos");
+
+                //editar Videojeugo
+            } else if (tareaSelec.equals("editarVideojuego")) {
+                response.sendRedirect("capturaNumCatalogo.jsp");
+
             } else if (tareaSelec.equals("editarCliente")) {
                 response.sendRedirect("capturaNumCredencial.jsp");
             } else if (tareaSelec.equals("eliminarCliente")) {

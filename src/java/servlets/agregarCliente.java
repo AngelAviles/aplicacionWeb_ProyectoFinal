@@ -21,7 +21,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "agregarCliente", urlPatterns = {"/agregarCliente"})
 public class agregarCliente extends HttpServlet {
@@ -48,7 +48,7 @@ public class agregarCliente extends HttpServlet {
             String direccion = request.getParameter("dir");
 
             Cliente c = new Cliente(numCredencial, nombre, direccion, telefono);
-            
+
             HttpSession session = request.getSession();
 
             try {
@@ -59,7 +59,7 @@ public class agregarCliente extends HttpServlet {
                 session.setAttribute("tarea", "agregarCliente");
                 session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
                 response.sendRedirect("error.jsp");
-                
+
             }
         }
     }

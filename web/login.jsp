@@ -1,7 +1,7 @@
 <%-- 
     Document   : login
     Created on : 15/11/2020, 12:57:42 PM
-    Author     : angel
+    Author     : Angel/Gildardo
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,15 +15,13 @@
     <body>
         <header>Login</header>
         <form action="logear" >
+
             <label for="usuario">Ingrese usuario: </label>
             <input type="text" name="usuario" id="usuario" required>
 
-            <label for="usuario">Ingrese password: </label>
+            <label for="usuario"> Ingrese password: </label>
             <input type="password" name="contra" id="contra" required>
             <input type="submit" value="Login" />
         </form>
     </body>
-    <footer>
-        <p>Derechos reservados</p>
-    </footer>
 </html>

@@ -24,7 +24,7 @@ import persistencia.PersistenciaBD;
 
 /**
  *
- * @author angel
+ * @author Angel Aviles/Gildardo Ortega
  */
 @WebServlet(name = "obtenRentas", urlPatterns = {"/obtenRentas"})
 public class obtenRentas extends HttpServlet {
@@ -62,13 +62,13 @@ public class obtenRentas extends HttpServlet {
                 String[] anioMesDiaDesde = desde.split("-");
                 Date dateDesde = new Date(Integer.parseInt(anioMesDiaDesde[0]) - 1900, Integer.parseInt(anioMesDiaDesde[1]) - 1, Integer.parseInt(anioMesDiaDesde[2]));
                 Fecha fechaDesde = new Fecha(dateDesde);
-                
+
                 String[] anioMesDiaHasta = hasta.split("-");
                 Date dateHasta = new Date(Integer.parseInt(anioMesDiaHasta[0]) - 1900, Integer.parseInt(anioMesDiaHasta[1]) - 1, Integer.parseInt(anioMesDiaHasta[2]));
                 Fecha fechaHasta = new Fecha(dateHasta);
-                
+
                 Periodo periodo = new Periodo(fechaDesde, fechaHasta);
-                
+
                 lista = crud.consultarRentasVideojuegos(periodo);
             }
 

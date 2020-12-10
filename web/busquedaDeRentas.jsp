@@ -28,31 +28,36 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <title><%=tarea%> - <%=usuario%></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="estilos/estilos.css" rel="stylesheet" type="text/css"/>
-        <link href="estilos/estilos.css" rel="stylesheet" type="text/css"/>
+
     </head>
     <body>
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
-        <nav>
-            <ul>
-                <li><a href="control?tarea=rentar">Rentar</a></li>
-                <li><a href="control?tarea=devolver">Devolver</a></li>
-            </ul>
-        </nav>
+        <fieldset>
+            <nav>
+                <ul>
+                    <fieldset>
+                        <li><a href="control?tarea=rentar" >Rentar</a></li>
+                        <li><a href="control?tarea=devolver" >Devolver</a></li>
+                    </fieldset>
+                </ul>
+            </nav>
+        </fieldset>
         <article>
             <h1>Seleccione un metodo de busqueda para encontrar una renta</h1>
-            
+
             <form action="obtenRentas">
-                
+
                 <label for="cliente">Por num. Credencial: </label>
                 <input id="cliente" type="text" name="cliente" />
-                
+
                 <label for="videojuego">Por num. Catalogo: </label>
                 <input id="videojuego" type="text" name="videojuego" />
-                
+
                 <p>Por periodo: </p>
 
                 <label for="desde">Desde: </label>
@@ -64,8 +69,6 @@
                 <input type="submit" value=<%=tarea%> />
             </form>
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>

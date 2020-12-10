@@ -12,51 +12,56 @@ and open the template in the editor.
     box-sizing: border-box;
 }
 
-header {
-    text-align: center; 
-    font-size: 50px;
-    background-color: gray;
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+p { color: black; 
+    font-family: Verdana; 
+}
+
+fieldset {
+    margin: 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    width: auto;
+    background:  #24303c;
+    padding: 20px;
+    border: none;
+    border-radius: 3px;
+    font-family: 'calibri';
+    font-size: 15px;
     color: white;
+    opacity: 0.9;
+}
+
+nav ul fieldset {
+    margin: 15px;
+    font-size: 35px;
+    opacity: 0.9;
+}
+
+header {
+    font-family: 'calibri';
+    float:top;
+    background-color:  white;
+    text-align: center;
+    font-size: 60px;
     padding: 15px;
+    border-radius: 6px;
 }
 
-nav {
-    float: left;
-    width: 20%;
-    background-color: lightgray;
-    font-size: 30px;
-    padding: 15px;
-    height: auto;
-    min-height: 300px;
-}
-
-nav ul {
-    list-style: none;
-    margin-left: -25px;
-}
-
-nav ul a{
+header a, header a:visited{
     text-decoration: none;
+    color: black;
 }
 
-nav ul a:hover{
-    color: peru;
+a {
+    margin: auto;
 }
 
-article {
-    width: 80%;
-    height: auto;
-    min-height: 300px;
-    float: left;
-}
-
-form{
-    width: 60%;
-    padding: 16px;
-    border-radius: 10px;
-    margin: 1% auto;
-    background-color: #ccc;
-    display: grid;
+ul { 
+    list-style: none; 
 }
 
 form label{
@@ -65,46 +70,84 @@ form label{
     display:inline-block;
 }
 
-form input[type="text"], input[type="password"]{
-    width:100%;
-    padding:3px 10px;
-    border:1px solid #f6f6f6;
-    border-radius:3px;
-    background-color:#f6f6f6;
-    margin:8px auto;
-    display:inline-block;
+form input[type="text"], input[type="password"], input[type="number"], input[type="date"], select {
+    width: 100%;
+    padding: 3px 10px;
+    border: 3px solid black;
+    border-radius: 3px;
+    background-color: #f6f6f6;
+    margin: 8px auto;
+    display: inline-block;
 }
 
 form input[type="submit"]{
     width:100%;
     padding:8px 16px;
     margin-top:32px;
-    border:1px solid #000;
+    border:5px solid black;
     border-radius:5px;
     display:block;
-    color:#fff;
-    background-color:#000;
+    color:black;
+    background-color:white;
+    font-size: 15px;
 } 
 
 form input[type="submit"]:hover{
     cursor:pointer;
 }
 
-table {
-    width: 60%;
-    padding: 16px;
-    border-radius: 10px;
-    margin: 1% auto;
-    background-color: #ccc;
+nav {
+    font-family: 'calibri';
+    list-style: none;
+    text-align: justify;
+    margin: auto;
+    color: white;
 }
 
-tr {
-    width:100%;
+nav ul a, nav ul a:visited{
+    text-decoration: none;
+    color: white;
 }
 
-footer {
-    clear: both;
-    margin: 0;
-    text-align: center;
+nav ul a:hover, header a:hover{
+    text-decoration: underline;
 }
 
+article{
+    font-family: 'calibri';
+    float:center;
+    font-size: 30px;
+    width: 80%;
+    heght:100px;
+    margin:auto;
+}
+checkbox{
+    font-size: 50px;
+}
+
+label{
+    font-size: 20px;
+    padding: 15px;
+
+}
+body{
+    background-image: url('https://scontent.fhmo2-2.fna.fbcdn.net/v/t1.0-9/23622440_10154812987682330_3808151369140600903_n.png?_nc_cat=103&ccb=2&_nc_sid=174925&_nc_eui2=AeEfBuBuevul3cTo0d0VIQtPCO7J8k_9CAwI7snyT_0IDOCaj89VmFwLOx6vers5WZTq03sO0knSBrageRtL-iRx&_nc_ohc=ePi7crB9eNkAX83Mj3H&_nc_ht=scontent.fhmo2-2.fna&oh=51609e5c5253702c11ac2c6e91aeb53c&oe=5FD90C5A');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+table, form {
+    font-family: 'calibri';
+    font-size: 20px;
+    background-color: #B23333;
+    margin: 15px auto;
+    padding: 10px;
+    width: 80%;
+    border-radius: 6px;
+    border-collapse: separate;
+    border: white 5px solid;
+    color: white;
+    padding-top: 0px;
+    opacity: 0.9;
+}

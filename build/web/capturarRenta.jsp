@@ -41,13 +41,17 @@
         <header><a href="menu.jsp">Nuestra aplicacion web</a></header>
         <nav>
             <ul>
-                <li><a href="control?tarea=rentar">Rentar</a></li>
-                <li><a href="control?tarea=devolver">Devolver</a></li>
+                <fieldset>
+                    <li><a href="control?tarea=rentar" >Rentar</a></li>
+                    <li><a href="control?tarea=devolver" >Devolver</a></li>
+                </fieldset>
             </ul>
         </nav>
         <article>
+            <h1><%=tarea%></h1>
+
             <form action=<%=tareaSelec%>>
-                
+
                 <label for="cliente">Escoge un cliente que va a <%=tareaSelec%>: </label>
                 <select id="cliente" name="cliente" required>
                     <%
@@ -57,7 +61,7 @@
                         }
                     %>
                 </select>
-                
+
                 <label for="videojuego">Escoge un videojuego para <%=tareaSelec%>: </label>
                 <select id="videojuego" name="videojuego" required>
                     <%
@@ -77,8 +81,6 @@
                 <input type="submit" value=<%=tarea%> />
             </form>
         </article>
-        <footer>
-            <p>Derechos Reservados</p>
-        </footer>
+
     </body>
 </html>
