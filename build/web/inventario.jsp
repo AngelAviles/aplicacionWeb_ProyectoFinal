@@ -21,8 +21,8 @@
         <nav>
             <ul>
                 <fieldset>
-                    <li><a href="control?tarea=inventarear" >Inventarear</a></li>
-                    <li><a href="control?tarea=desinventarear" >Desinventarear</a></li>
+                    <li><a href="control?tarea=inventariar" >Inventariar</a></li>
+                    <li><a href="control?tarea=desinventariar" >Desinventariar</a></li>
                 </fieldset>
             </ul>
         </nav>

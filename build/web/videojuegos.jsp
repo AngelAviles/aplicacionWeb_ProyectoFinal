@@ -23,6 +23,7 @@
             <ul>
                 <fieldset>
                     <li><a href="control?tarea=listarVideojuegos"  >Listar Videojuegos</a></li>
+                    <li><a href="control?tarea=listarVideojuegosGenero"  >Listar Videojuegos por Genero</a></li>
                     <li><a href="control?tarea=agregarVideojuego"  >Agregar Videojuegos</a></li>
                     <li><a href="control?tarea=editarVideojuego" >Editar Videojuegos</a></li>
                     <li><a href="control?tarea=eliminarVideojuego" >Eliminar Videojuegos</a></li>

@@ -88,8 +88,11 @@ public class obtenCliente extends HttpServlet {
 
                         response.sendRedirect("error.jsp");
                     } else {
+                        List rentasCliente = crud.consultarRentasVideojuegos(clienteObtenido);
+                        
                         session.setAttribute("cliente", clienteObtenido);
                         session.setAttribute("numCredencial", clienteObtenido.getNumCredencial());
+                        session.setAttribute("listaRentas", rentasCliente);
 
                         response.sendRedirect("desplegarCliente.jsp");
                     }

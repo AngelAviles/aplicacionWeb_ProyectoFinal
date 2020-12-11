@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import objetosNegocio.ArticuloED;
 import objetosNegocio.Cliente;
 import objetosNegocio.Videojuego;
 import persistencia.PersistenciaBD;
@@ -89,8 +90,24 @@ public class obtenVideojuego extends HttpServlet {
 
                         response.sendRedirect("error.jsp");
                     } else {
+                        
+                        List rentasVideojuego = crud.consultarRentas(videojuegoObtenido);
+                        List lista = crud.consultarInventarioVideojuegos();
+                        ArticuloED articulo = null;
+                        
+                        for (int i = 0; i < lista.size(); i++) {
+                            ArticuloED a = (ArticuloED) lista.get(i);
+                            
+                            if (a.getArticulo().getNumCatalogo().equalsIgnoreCase(videojuegoObtenido.getNumCatalogo())) {
+                                articulo = a;
+                                break;
+                            }
+                        }
+
                         session.setAttribute("videojuego", videojuegoObtenido);
                         session.setAttribute("numCatalogo", videojuegoObtenido.getNumCatalogo());
+                        session.setAttribute("videojuegoRentas", rentasVideojuego);
+                        session.setAttribute("articulo", articulo);
 
                         response.sendRedirect("desplegarVideojuego.jsp");
                     }

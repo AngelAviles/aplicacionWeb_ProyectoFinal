@@ -10,14 +10,8 @@
     String tareaSelec = (String) session.getAttribute("tarea");
     String tarea = "";
 
-    if (tareaSelec.equals("agregarVideojuego")) {
-        tarea = "Agregar Videojuego";
-
-    } else if (tareaSelec.equals("editarVideojuego")) {
-        tarea = "Editar Videojuego";
-
-    } else if (tareaSelec.equals("eliminarVideojuego")) {
-        tarea = "Eliminar Videojuego";
+    if (tareaSelec.equals("listarVideojuegosGenero")) {
+        tarea = "Listar videojuegos por Genero";
     }
 %>
 
@@ -46,8 +40,8 @@
         <article>
             <h1><%=tarea%></h1>
 
-            <form action="obtenVideojuego">
-                <input type="text" name="numCatalogo" placeholder="Num. Catalogo" required/>
+            <form action="obtenVideojuegosGenero">
+                <input type="text" name="genero" placeholder="Genero" required/>
 
                 <input type="submit" value="Comprobar" />
             </form>

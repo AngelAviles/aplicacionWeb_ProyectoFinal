@@ -8,22 +8,21 @@ package servlets;
 import interfaces.IPersistencia;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import objetosNegocio.Cliente;
-import objetosNegocio.Videojuego;
 import persistencia.PersistenciaBD;
 
 /**
  *
- * @author Angel Aviles/Gildardo Ortega
+ * @author angel
  */
-@WebServlet(name = "inventarear", urlPatterns = {"/inventarear"})
-public class inventarear extends HttpServlet {
+@WebServlet(name = "obtenVideojuegosGenero", urlPatterns = {"/obtenVideojuegosGenero"})
+public class obtenVideojuegosGenero extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,23 +37,23 @@ public class inventarear extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            String tareaSelec = (String) session.getAttribute("tarea");
+            String genero = request.getParameter("genero");
 
             IPersistencia crud = new PersistenciaBD();
+            List listaVideojuegos = null;
 
-            String numCatalogo = request.getParameter("videojuego");
-            Videojuego v = new Videojuego(numCatalogo);
+            listaVideojuegos = crud.consultarVideojuegosGenero(genero);
 
-            int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+            if (listaVideojuegos.size() == 0) {
+                session.setAttribute("dato", genero);
+                session.setAttribute("error", "No existen videojuegos con ese genero.");
 
-            HttpSession session = request.getSession();
-
-            try {
-                crud.inventariar(v, cantidad);
-                response.sendRedirect("obtenInventario");
-            } catch (Exception e) {
-                session.setAttribute("tarea", "inventarear");
-                session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
                 response.sendRedirect("error.jsp");
+            } else if (tareaSelec.equals("listarVideojuegosGenero")) {
+                session.setAttribute("listaVideojuegos", listaVideojuegos);
+                response.sendRedirect("desplegarVideojuegos.jsp");
 
             }
         }

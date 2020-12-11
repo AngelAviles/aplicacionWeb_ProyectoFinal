@@ -22,8 +22,8 @@ import persistencia.PersistenciaBD;
  *
  * @author Angel Aviles/Gildardo Ortega
  */
-@WebServlet(name = "desinventarear", urlPatterns = {"/desinventarear"})
-public class desinventarear extends HttpServlet {
+@WebServlet(name = "inventariar", urlPatterns = {"/inventariar"})
+public class inventariar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,10 +49,10 @@ public class desinventarear extends HttpServlet {
             HttpSession session = request.getSession();
 
             try {
-                crud.desinventariar(v, cantidad);
+                crud.inventariar(v, cantidad);
                 response.sendRedirect("obtenInventario");
             } catch (Exception e) {
-                session.setAttribute("tarea", "desinventarear");
+                session.setAttribute("tarea", "inventariar");
                 session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
                 response.sendRedirect("error.jsp");
 

@@ -1,3 +1,4 @@
+<%@page import="objetosNegocio.Renta"%>
 <%@page import="objetosNegocio.Cliente"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,6 +19,8 @@
     String usuario = (String) session.getAttribute("elUsuario");
     Cliente cliente = (Cliente) session.getAttribute("cliente");
     session.removeAttribute("cliente");
+    List listaRentas = (List) session.getAttribute("listaRentas");
+    session.removeAttribute("listaRentas");
 %>
 
 <!DOCTYPE html>
@@ -69,13 +72,45 @@
             </table>  
             <%
                 if (tareaSelec.equalsIgnoreCase("eliminarCliente")) {
-                    session.setAttribute("cliente", cliente);
-                    out.print("<p>¿Deseas eliminar a este cliente?</p>"
-                            + "<form action=\"eliminarCliente\" >"
-                            + "<input type=\"submit\" value=\"Eliminar Cliente\" />"
-                            + "</form>"
-                    );
+
+                    if (listaRentas.size() == 0) {
+                        session.setAttribute("cliente", cliente);
+                        out.print("<p>¿Deseas eliminar a este cliente?</p>"
+                                + "<form action=\"eliminarCliente\" >"
+                                + "<input type=\"submit\" value=\"Eliminar Cliente\" />"
+                                + "</form>"
+                        );
+                    } else { %>
+            <p>NO SE PUEDE ELIMINAR ESTE CLIENTE PORQUE TIENE UNA RENTA</p>
+
+            <h1>Rentas Encontradas</h1>
+
+            <table>
+                <thead>
+                <th>Num. Credencial</th>
+                <th>Num. Catalogo</th>
+                <th>Fecha de renta</th>
+                <th>Dias de renta</th>
+                </thead>
+                <%
+                    for (int i = 0; i < listaRentas.size(); i++) {
+                        Renta r = (Renta) listaRentas.get(i);
+                %>
+                <tr>
+                    <td><%=r.getCliente().getNumCredencial()%></td>
+                    <td><%=r.getArticulo().getNumCatalogo()%></td>
+                    <td><%=r.getFechaRenta().toDateString()%></td>
+                    <td><%=r.getTiempoRenta()%></td>
+                </tr>
+
+                <%
+                    }
+                %>
+            </table>
+            <%
+                    }
                 }
+
             %>
         </article>
 

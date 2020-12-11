@@ -57,7 +57,7 @@
                     <%
                         for (int i = 0; i < listaClientes.size(); i++) {
                             Cliente c = (Cliente) listaClientes.get(i);
-                            out.print("<option value=\"" + c.getNumCredencial() + "\">" + c.toString() + "</option>");
+                            out.print("<option value=\"" + c.getNumCredencial() + "\">" + c.getNumCredencial() + " (" + c.getNombre() + ") " + "</option>");
                         }
                     %>
                 </select>
@@ -67,7 +67,7 @@
                     <%
                         for (int i = 0; i < listaVideojuegos.size(); i++) {
                             ArticuloED v = (ArticuloED) listaVideojuegos.get(i);
-                            out.print("<option value=\"" + v.getArticulo().getNumCatalogo() + "\">" + v.toString() + "</option>");
+                            out.print("<option value=\"" + v.getArticulo().getNumCatalogo() + "\">" + v.getArticulo().getNumCatalogo() + " (" + v.getArticulo().getTitulo() + ") " + "</option>");
                         }
                     %>
                 </select>

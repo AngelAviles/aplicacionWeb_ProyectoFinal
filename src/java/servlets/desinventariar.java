@@ -15,14 +15,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import objetosNegocio.Cliente;
+import objetosNegocio.Videojuego;
 import persistencia.PersistenciaBD;
 
 /**
  *
  * @author Angel Aviles/Gildardo Ortega
  */
-@WebServlet(name = "obtenInventario", urlPatterns = {"/obtenInventario"})
-public class obtenInventario extends HttpServlet {
+@WebServlet(name = "desinventariar", urlPatterns = {"/desinventariar"})
+public class desinventariar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,21 +39,28 @@ public class obtenInventario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
+            
             IPersistencia crud = new PersistenciaBD();
 
+            String numCatalogo = request.getParameter("videojuego");
+            Videojuego v = new Videojuego(numCatalogo);
+            
+            int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+            
             HttpSession session = request.getSession();
 
-            String tareaSelec = (String) session.getAttribute("tarea");
-
-            if (tareaSelec.equals("desinventariar")) {
-                List listaInventario = crud.consultarVideojuegosDisponibles();
-                session.setAttribute("listaVideojuegos", listaInventario);
-                response.sendRedirect("seleccionarCantidad.jsp");
-            } else {
+            try {
+                crud.desinventariar(v, cantidad);
+                
                 List listaInventario = crud.consultarInventarioVideojuegos();
                 session.setAttribute("listaInventario", listaInventario);
                 response.sendRedirect("desplegarInventario.jsp");
+                
+            } catch (Exception e) {
+                session.setAttribute("tarea", "desinventariar");
+                session.setAttribute("error", "Ocurrio un error de conexion... Intentar mas tarde...");
+                response.sendRedirect("error.jsp");
+                
             }
         }
     }

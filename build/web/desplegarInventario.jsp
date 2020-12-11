@@ -12,10 +12,10 @@
 
     String tarea = "";
 
-    if (tareaSelec.equals("inventarear")) {
-        tarea = "Inventarear";
-    } else if (tareaSelec.equals("desinventarear")) {
-        tarea = "Desinventarear";
+    if (tareaSelec.equals("inventariar")) {
+        tarea = "Inventariar";
+    } else if (tareaSelec.equals("desinventariar")) {
+        tarea = "Desinventariar";
     }
 
     String usuario = (String) session.getAttribute("elUsuario");
@@ -36,8 +36,8 @@
         <nav>
             <ul>
                 <fieldset>
-                    <li><a href="control?tarea=inventarear" >Inventarear</a></li>
-                    <li><a href="control?tarea=desinventarear" >Desinventarear</a></li>
+                    <li><a href="control?tarea=inventariar" >Inventariar</a></li>
+                    <li><a href="control?tarea=desinventariar" >Desinventariar</a></li>
                 </fieldset>
             </ul>
         </nav>

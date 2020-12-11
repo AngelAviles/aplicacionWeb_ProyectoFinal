@@ -56,6 +56,10 @@ public class control extends HttpServlet {
             } else if (tareaSelec.equals("listarVideojuegos")) {
                 response.sendRedirect("obtenVideojuegos");
 
+                //listar Videojuegos
+            } else if (tareaSelec.equals("listarVideojuegosGenero")) {
+                response.sendRedirect("capturaGenero.jsp");
+                
                 //editar Videojeugo
             } else if (tareaSelec.equals("editarVideojuego")) {
                 response.sendRedirect("capturaNumCatalogo.jsp");
@@ -64,10 +68,10 @@ public class control extends HttpServlet {
                 response.sendRedirect("capturaNumCredencial.jsp");
             } else if (tareaSelec.equals("eliminarCliente")) {
                 response.sendRedirect("capturaNumCredencial.jsp");
-            } else if (tareaSelec.equals("inventarear")) {
+            } else if (tareaSelec.equals("inventariar")) {
                 response.sendRedirect("obtenVideojuegos");
-            } else if (tareaSelec.equals("desinventarear")) {
-                response.sendRedirect("obtenVideojuegos");
+            } else if (tareaSelec.equals("desinventariar")) {
+                response.sendRedirect("obtenInventario");
             } else if (tareaSelec.equals("rentar")) {
                 response.sendRedirect("obtenVideojuegosDisponibles");
             } else if (tareaSelec.equals("devolver")) {
